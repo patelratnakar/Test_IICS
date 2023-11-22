@@ -1,0 +1,20 @@
+name: Delete JSON files
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
+
+jobs:
+  delete-json-files:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Delete JSON files
+      run: |
+        find . -type f -name "*.json" -exec git rm --cached {} \;
+        git commit -m "Remove all .json files" || true
+        git push
