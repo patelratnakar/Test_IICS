@@ -15,7 +15,7 @@ jobs:
 
     - name: Delete JSON files
       run: |
-        git config --global user.email "ratnakarpatelz@gmail.com.com"
+        git config --global user.email "ratnakarpatelz@gmail.com"
         git config --global user.name "Ratnakar"
         find . -type f -name "*.json" -exec git rm --cached {} \;
         git commit -m "Remove all .json files" || true
