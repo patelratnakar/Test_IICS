@@ -4,12 +4,18 @@ name: DEPLOY_MAPPING_TASK
 
 # Controls when the workflow will run
 on:
-  workflow_dispatch:
-    inputs:
-      committed_sha:
-        description: "Hash to deploy"
-        type: string
-        required: true
+ push:
+   branches:
+      - dev
+  
+  
+  
+  #workflow_dispatch:
+    #inputs:
+      #committed_sha:
+        #description: "Hash to deploy"
+        #type: string
+        #required: true
 
 env:
   IICS_LOGIN_URL: https://dm2-us.informaticacloud.com
@@ -17,9 +23,6 @@ env:
  
   IICS_USERNAME: ${{ secrets.IICS_USERNAME }}
   IICS_PASSWORD: ${{ secrets.IICS_PASSWORD }}
-
-  UAT_IICS_USERNAME: ${{ secrets.UAT_IICS_USERNAME }}
-  UAT_IICS_PASSWORD: ${{ secrets.UAT_IICS_PASSWORD }}
 
   # This is overriding until we connect the repository with a workflow_dispatch
 
