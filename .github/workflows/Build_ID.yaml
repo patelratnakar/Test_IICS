@@ -1,7 +1,7 @@
-name: Build and deploy
+#name: Build and deploy
 on: push
  
-jobs:
+#jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
