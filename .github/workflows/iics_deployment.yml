@@ -39,7 +39,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Install python and dependent modules
+      # Install Python and dependent modules
       - uses: actions/setup-python@v3
         with:
           python-version: '3.8*'
@@ -49,7 +49,7 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
 
-      # Runs a single command using the runners shell
+      # Runs a single command using the runner's shell
       - name: Login to development 
         run: |
             python ./scripts/infa_login.py
@@ -76,7 +76,7 @@ jobs:
         with:
           path: iics-promotion-pipeline
 
-      # Install python and dependent modules
+      # Install Python and dependent modules
       - uses: actions/setup-python@v3
         with:
           python-version: '3.8*'
@@ -92,7 +92,7 @@ jobs:
       - name: Commit changes to UAT
         run: cd ./IICS-CDP-CICD-demo; git fetch --all; git cherry-pick --strategy=recursive -X theirs ${COMMIT_HASH}; git push
 
-      - name: Get latest UAT commit hash
+      - name: Get the latest UAT to commit hash
         run: cd ./IICS-CDP-CICD-demo; git pull; echo "UAT_COMMIT_HASH=$(git log -1 --pretty=format:%H)" >> $GITHUB_ENV
       
       - name: Login to UAT
