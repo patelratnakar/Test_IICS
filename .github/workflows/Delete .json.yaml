@@ -1,6 +1,6 @@
-name: Delete JSON files
+#name: Delete JSON files
 
-on:
+#on:
   push:
     branches:
       - main  # Adjust the branch name as needed
