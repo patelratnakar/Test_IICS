@@ -79,7 +79,7 @@ jobs:
       # Install python and dependent modules
       - uses: actions/setup-python@v3
         with:
-          python-version: '3.x'
+          python-version: '3.8*'
       
       - name: Install python modules
         run: |
@@ -87,7 +87,7 @@ jobs:
             pip install requests
 
       - name: Set default username
-        run: git config --global user.email "bbird@informatica.com"; git config --global user.name "Brandon Bird"
+        run: git config --global user.email "ratnakarpatelz@gmail.com"; git config --global user.name "Ratnakar"
 
       - name: Commit changes to UAT
         run: cd ./IICS-CDP-CICD-demo; git fetch --all; git cherry-pick --strategy=recursive -X theirs ${COMMIT_HASH}; git push
