@@ -1,6 +1,6 @@
-name: IICS CI
+#name: IICS CI
 
-on:
+#on:
   push:
     branches:
       - main

@@ -1,4 +1,4 @@
-name: Delete JSON files
+#name: Delete JSON files
 
 on:
   push:

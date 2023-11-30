@@ -1,0 +1,103 @@
+
+
+name: DEPLOY_MAPPING_TASK
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    inputs:
+      committed_sha:
+        description: "Hash to deploy"
+        type: string
+        required: true
+
+env:
+  IICS_LOGIN_URL: https://dm2-us.informaticacloud.com
+  IICS_POD_URL: https://usw1.dm2-us.informaticacloud.com
+ 
+  IICS_USERNAME: ${{ secrets.IICS_USERNAME }}
+  IICS_PASSWORD: ${{ secrets.IICS_PASSWORD }}
+
+  UAT_IICS_USERNAME: ${{ secrets.UAT_IICS_USERNAME }}
+  UAT_IICS_PASSWORD: ${{ secrets.UAT_IICS_PASSWORD }}
+
+  # This is overriding until we connect the repository with a workflow_dispatch
+
+  COMMIT_HASH: ${{  github.event.inputs.committed_sha }}
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  dev_build:
+    name: Review Development Code
+    environment:
+      name: dev
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Install python and dependent modules
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.8*'
+      
+      - name: Install python modules
+        run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+
+      # Runs a single command using the runners shell
+      - name: Login to development 
+        run: |
+            python ./scripts/infa_login.py
+
+      - name: Test Committed Mapping Tasks
+        run: python ./scripts/infa_get_updates.py
+
+  uat_commit:
+    name: Complete uat promotion
+    environment:
+      name: uat
+    needs: dev_build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: patelratnakar/Test_IICS
+          ref: uat
+          token: ${{ secrets.GH_TOKEN }}
+          path: Test_IICS
+
+      - uses: actions/checkout@v3
+        with:
+          path: iics-promotion-pipeline
+
+      # Install python and dependent modules
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+      
+      - name: Install python modules
+        run: |
+            python -m pip install --upgrade pip
+            pip install requests
+
+      - name: Set default username
+        run: git config --global user.email "bbird@informatica.com"; git config --global user.name "Brandon Bird"
+
+      - name: Commit changes to UAT
+        run: cd ./IICS-CDP-CICD-demo; git fetch --all; git cherry-pick --strategy=recursive -X theirs ${COMMIT_HASH}; git push
+
+      - name: Get latest UAT commit hash
+        run: cd ./IICS-CDP-CICD-demo; git pull; echo "UAT_COMMIT_HASH=$(git log -1 --pretty=format:%H)" >> $GITHUB_ENV
+      
+      - name: Login to UAT
+        run: |
+            python ./iics-promotion-pipeline/scripts/infa_login.py
+
+      - name: Sync and test UAT deployment
+        run: python ./iics-promotion-pipeline/scripts/infa_update_and_test.py

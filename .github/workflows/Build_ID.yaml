@@ -1,5 +1,5 @@
-name: Build and deploy
-on: push
+#name: Build and deploy
+#on: push
  
 jobs:
   build:
