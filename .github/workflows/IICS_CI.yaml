@@ -3,7 +3,7 @@ name: IICS CI
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
     - name: Build IICS Assets
       run: |
         # Use Informatica CLI commands to build your IICS assets
-        informatica cloud createbundle -s patientinsight  -b <bundle_name>
+        informatica cloud createbundle -s patientinsight  -b test_mapping
       env:
         INFA_USER_NAME: ${{ secrets.INFA_USER_NAME }}
         INFA_USER_PASSWORD: ${{ secrets.INFA_USER_PASSWORD }}
