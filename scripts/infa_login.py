@@ -5,11 +5,8 @@ URL = os.environ['IICS_LOGIN_URL']
 USERNAME = os.environ['IICS_USERNAME']
 PASSWORD = os.environ['IICS_PASSWORD']
 
-UAT_USERNAME = os.environ['UAT_IICS_USERNAME']
-UAT_PASSWORD = os.environ['UAT_IICS_PASSWORD']
-
 URL = "https://dm2-us.informaticacloud.com"
-BODY = {"username": USERNAME,"password": PASSWORD}
+BODY = {"username": USERNAME, "password": PASSWORD}
 
 r = requests.post(url = URL, json = BODY)
 
