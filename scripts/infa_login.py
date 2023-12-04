@@ -14,12 +14,8 @@ r = requests.post(url = URL, json = BODY)
 if r.status_code != 200:
     print("Caught exception: " + r.text)
 
-elif json_data = json.load(r)
-json_output = json.dumps(json_data, indent=2)
-print(json_output)
-
 # extracting data in JSON format
-data = r.json()
+data = +r.json()
 
 # Set session tokens to the environment
 env_file = os.getenv('GITHUB_ENV')
