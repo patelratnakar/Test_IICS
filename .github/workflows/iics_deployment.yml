@@ -45,7 +45,7 @@ jobs:
       # Install Python and dependent modules
       - uses: actions/setup-python@v3
         with:
-          python-version: '3.8'
+          python-version: '3.'
       
       - name: Install python modules
         run: |
@@ -82,7 +82,7 @@ jobs:
       # Install Python and dependent modules
       - uses: actions/setup-python@v3
         with:
-          python-version: '3.8'
+          python-version: '3*'
       
       - name: Install python modules
         run: |
