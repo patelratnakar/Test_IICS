@@ -15,7 +15,7 @@ if r.status_code != 200:
     print("Caught exception: " + r.text)
 
 # extracting data in JSON format
-data = +r.json()
+data = r.json()
 
 # Set session tokens to the environment
 env_file = os.getenv('GITHUB_ENV')
