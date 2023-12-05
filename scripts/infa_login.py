@@ -13,7 +13,7 @@ r = requests.post(url = URL, json = BODY)
 
 if r.status_code != 200:
     print("Caught exception: " + r.text)
-
+print 2
 # extracting data in JSON format
 data = r.json()
 
