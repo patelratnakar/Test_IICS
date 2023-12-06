@@ -65,7 +65,10 @@ jobs:
         run: |
          for ab in ${{steps.login.outputs}}
          do
-          echo $ab
+          for qw in ${{ab}}
+          do
+           echo $qw
+          done
          done
 
   uat_commit:
