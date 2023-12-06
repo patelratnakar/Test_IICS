@@ -10,7 +10,7 @@ on:
   
   
   
-  #workflow_dispatch:
+  workflow_dispatch:
     #inputs:
       #committed_sha:
         #description: "Hash to deploy"
