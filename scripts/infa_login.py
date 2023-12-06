@@ -18,3 +18,5 @@ def loginCall(userName, passWord):
     response_json = response.json() if response and response.status_code == 200 else None
     infa_session_id = response_json['userInfo']['sessionId']
     return infa_session_id
+    print(infa_session_id)
+    
