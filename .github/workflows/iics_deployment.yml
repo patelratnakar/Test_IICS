@@ -62,7 +62,11 @@ jobs:
         # env:
         #  sessionId: ${{login.outputs}}
         # run: python ./scripts/infa_get_updates.py
-        run: echo ${{steps.login.outputs}}
+        run: |
+         for ab in ${{steps.login.outputs}}
+         do
+          echo $ab
+         done
 
   uat_commit:
     name: Complete uat promotion
