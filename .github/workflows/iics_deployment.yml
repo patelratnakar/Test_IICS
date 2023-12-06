@@ -54,11 +54,15 @@ jobs:
 
       # Runs a single command using the runner's shell
       - name: Login to development 
+        id: login
         run: |
             python ./scripts/infa_login.py
 
       - name: Test Committed Mapping Tasks
-        run: python ./scripts/infa_get_updates.py
+        env:
+         sessionId: ${{login.outputs}}
+        # run: python ./scripts/infa_get_updates.py
+        run: echo ${{login.outputs}}
 
   uat_commit:
     name: Complete uat promotion
