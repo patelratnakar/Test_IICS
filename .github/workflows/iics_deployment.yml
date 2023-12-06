@@ -45,7 +45,7 @@ jobs:
       # Install Python and dependent modules
       - uses: actions/setup-python@v3
         with:
-          python-version: '3.10'
+          python-version: '3.12'
       
       - name: Install python modules
         run: |
