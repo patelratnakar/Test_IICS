@@ -65,7 +65,7 @@ jobs:
         run: |
          for ab in ${{steps.login.outputs}}
          do
-          for qw in ${{ab}}
+          for qw in $ab
           do
            echo $qw
           done
