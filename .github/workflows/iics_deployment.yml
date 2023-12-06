@@ -59,10 +59,10 @@ jobs:
             python ./scripts/infa_login.py
 
       - name: Test Committed Mapping Tasks
-        env:
-         sessionId: ${{login.outputs}}
+        # env:
+        #  sessionId: ${{login.outputs}}
         # run: python ./scripts/infa_get_updates.py
-        run: echo ${{login.outputs}}
+        run: echo ${{steps.login.outputs}}
 
   uat_commit:
     name: Complete uat promotion
