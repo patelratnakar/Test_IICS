@@ -1,10 +1,3 @@
-# This sample source code is offered only as an example of what can or might be built using the IICS Github APIs, 
-# and is provided for educational purposes only. This source code is provided "as-is" 
-# and without representations or warrantees of any kind, is not supported by Informatica.
-# Users of this sample code in whole or in part or any extraction or derivative of it 
-# assume all the risks attendant thereto, and Informatica disclaims any/all liabilities 
-# arising from any such use to the fullest extent permitted by law.
-
 import requests
 import os
 import json
@@ -13,7 +6,7 @@ import sys
 
 URL = os.environ['IICS_POD_URL']
 SESSION_ID = os.environ['sessionId']
-COMMIT_HASH = os.environ['COMMIT_HASH']
+#COMMIT_HASH = os.environ['COMMIT_HASH']
 
 HEADERS = {"Content-Type": "application/json; charset=utf-8", "INFA-SESSION-ID": SESSION_ID }
 HEADERS_V2 = {"Content-Type": "application/json; charset=utf-8", "icSessionId": SESSION_ID }
