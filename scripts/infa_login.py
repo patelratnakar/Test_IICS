@@ -22,3 +22,4 @@ def loginCall(userName, passWord):
     with open(os.environ['GITHUB_OUTPUT'], 'a') as file:
         print(f'{name}={infa_session_id}', file=file)
     return infa_session_id
+    
